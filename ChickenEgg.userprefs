@@ -1,9 +1,10 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Egg.js">
     <Files>
-      <File FileName="Assets\Scripts\Egg.js" Line="24" Column="2" />
-      <File FileName="Assets\Scripts\Egg.js" Line="3" Column="20" />
+      <File FileName="Assets\Scripts\Score.js" Line="16" Column="2" />
+      <File FileName="Assets\Scripts\Egg.js" Line="28" Column="1" />
+      <File FileName="Assets\Scripts\HandsController.js" Line="12" Column="42" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

@@ -11,14 +11,10 @@ function Start () {
 	EggShotPosition = GameObject.Find("Niwatori").transform.GetChild(0).gameObject; 
 }
 
-function Update () {
-	
-}
-
 function touched(){
 	countTouch--;
 	countTouchTotal++;
-	if(countTouch == 0 && touchState == 2){
+	if(countTouch == 0 && touchState == 0){
 		// born egg.
 		Instantiate(Egg,EggShotPosition.transform.position,EggShotPosition.transform.rotation);
 		
@@ -26,7 +22,7 @@ function touched(){
 		touchState = 0;
 		countTouchTotal = 0;
 		setCountTouch();
-	}else if(countTouch == 0 && touchState < 2){
+	}else if(countTouch == 0 && touchState < 3){
 		//touchState.
 		
 		//reset statement.
@@ -34,7 +30,6 @@ function touched(){
 		touchState++;
 		setCountTouch();
 	} 
-	Debug.Log("count:" + countTouch + " stage:" + touchState);
 	
 }
 

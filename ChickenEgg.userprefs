@@ -1,8 +1,9 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Score.js">
+  <MonoDevelop.Ide.Workspace />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Niwatori.js">
     <Files>
-      <File FileName="Assets\Scripts\Score.js" Line="16" Column="2" />
+      <File FileName="Assets\Scripts\HandsController.js" Line="19" Column="3" />
+      <File FileName="Assets\Scripts\Niwatori.js" Line="12" Column="2" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

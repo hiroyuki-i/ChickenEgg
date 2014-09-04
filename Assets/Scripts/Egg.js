@@ -1,6 +1,6 @@
 ﻿#pragma strict
 
-var speed : int = 8;
+var speed : int = 11;
 var eggTime : float = 10;
 private var elapsedTime : float;
 private var isActiveEgg : boolean = false;

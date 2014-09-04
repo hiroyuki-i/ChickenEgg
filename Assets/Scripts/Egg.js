@@ -1,11 +1,24 @@
 ﻿#pragma strict
 
 var speed : int = 8;
+var eggTime : float = 10;
+private var elapsedTime : float;
+private var isActiveEgg : boolean = false;
+private var anime : Animator;
 
 function Start () {
 	rigidbody2D.velocity = transform.up.normalized * speed;
+	anime = GetComponent(Animator);
 }
 
 function Update () {
-	
+	elapsedTime += Time.deltaTime;
+	if(elapsedTime > eggTime && isActiveEgg == false){
+		anime.SetBool("isBirth",true);
+		isActiveEgg = true;
+	}
+}
+
+function fadeOut(){
+	anime.SetBool("isFly",true);
 }

@@ -8,7 +8,7 @@ function Start () {
 }
 
 function Update () {
-	countHiyoko.text = currentScore.ToString() + "Hiyoko !";
+	countHiyoko.text = currentScore.ToString() + " Hiyoko !";
 }
 
 function addScore(){

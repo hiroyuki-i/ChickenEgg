@@ -28,18 +28,12 @@ function touched(){
 		//touchState.
 		
 		//reset statement.
-		changeHevenState();
 		touchState++;
 		setCountTouch();
-	} 
-	
+	}
 }
 
 function setCountTouch(){
 	countTouch = parseInt(Random.Range(1.0 ,4.0));
-}
-
-function changeHevenState(){
-	
 }
 

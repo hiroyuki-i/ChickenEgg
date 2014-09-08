@@ -5,11 +5,11 @@
 	<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
 	<ProductVersion>10.0.20506</ProductVersion>
 	<SchemaVersion>2.0</SchemaVersion>
-	<ProjectGuid>{24D24087-59C4-25CA-26D3-19288D8BD024}</ProjectGuid>
+	<ProjectGuid>{7613C9E1-8721-684A-0185-0D0C67DCAE27}</ProjectGuid>
 	<OutputType>Library</OutputType>
 	<AppDesignerFolder>Properties</AppDesignerFolder>
 	<RootNamespace></RootNamespace>
-	<AssemblyName>Assembly-UnityScript</AssemblyName>
+	<AssemblyName>Assembly-CSharp-firstpass</AssemblyName>
 	<TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
 	<FileAlignment>512</FileAlignment>
 	<BaseDirectory>Assets</BaseDirectory>
@@ -46,12 +46,11 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\Auth\UserRegistration.js" />
-     <Compile Include="Assets\Scripts\Egg.js" />
-     <Compile Include="Assets\Scripts\HandsController.js" />
-     <Compile Include="Assets\Scripts\Niwatori.js" />
-     <Compile Include="Assets\Scripts\Score.js" />
-     <Compile Include="Assets\Scripts\Wall.js" />
+     <Compile Include="Assets\Plugins\JSON\Editor\JSONChecker.cs" />
+     <Compile Include="Assets\Plugins\JSON\JSONObject.cs" />
+     <Compile Include="Assets\Plugins\JSON\JSONTemplates.cs" />
+     <Compile Include="Assets\Plugins\JSON\VectorTemplates.cs" />
+     <None Include="Assets\Plugins\JSON\readme.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

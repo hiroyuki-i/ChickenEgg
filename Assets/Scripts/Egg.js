@@ -23,9 +23,5 @@ function Update () {
 
 function fadeOut(){
 	anime.SetBool("isFly",true);
-	addScore();
-}
-
-function addScore(){
 	score.addScore();
 }

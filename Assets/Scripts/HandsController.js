@@ -7,7 +7,6 @@ function Update () {
 			touchPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 	}
 	if((Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended) || Input.GetMouseButtonUp(0) ){
-		Debug.Log(touchPoint);
 		var touchObject : Collider2D[]  = Physics2D.OverlapPointAll(touchPoint);
 		for(var i = 0; i< touchObject.length; i++ ){
 			if(touchObject[i].gameObject.name == "Niwatori"){

@@ -47,11 +47,15 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\Auth\UserRegistration.js" />
-     <Compile Include="Assets\Scripts\Egg.js" />
-     <Compile Include="Assets\Scripts\HandsController.js" />
-     <Compile Include="Assets\Scripts\Niwatori.js" />
-     <Compile Include="Assets\Scripts\Score.js" />
-     <Compile Include="Assets\Scripts\Wall.js" />
+     <Compile Include="Assets\Scripts\Main\Egg.js" />
+     <Compile Include="Assets\Scripts\Main\Niwatori.js" />
+     <Compile Include="Assets\Scripts\Main\Score.js" />
+     <Compile Include="Assets\Scripts\Main\TouchController.js" />
+     <Compile Include="Assets\Scripts\Main\Wall.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
+      <Project>{7613C9E1-8721-684A-0185-0D0C67DCAE27}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

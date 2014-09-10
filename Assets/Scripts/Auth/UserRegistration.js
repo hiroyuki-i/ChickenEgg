@@ -3,16 +3,12 @@
 import System;
 
 private var userId : String;
-private var URL : String = "localhost/register.php";
+private var URL : String = "127.0.0.1";
 
 function Start () {
-	transitionToMain();
-}
-
-function transitionToMain(){
 	userId = PlayerPrefs.GetString("userId","");
-	if(userId.length > 0){
-		Debug.Log(userId);
+	var userHash : String = PlayerPrefs.GetString("userHash","");
+	if(userId.length > 0 && userHash.Length > 0){
 		Application.LoadLevel("Main");
 	}
 }
@@ -29,12 +25,8 @@ function OnGUI(){
 
 function registrationUserName(){
 
-	try{		
-		if(userId.length == 0){
-			throw "error:001 ユーザーネームが入力されていません。";
-		}		
-	}catch( e ){
-		EditorUtility.DisplayDialog("Error!",e.Message,"OK");
+	if(userId.length == 0){
+		EditorUtility.DisplayDialog("Error!","error:001 ユーザーネームが入力されていません。","OK");
 		return;
 	}
 
@@ -42,11 +34,14 @@ function registrationUserName(){
 	var form : WWWForm = new WWWForm();
 	form.AddField("userId",userId);
 	form.AddField("userHash",userHash);
-	var www : WWW = new WWW(URL,form);
+	var www : WWW = new WWW(URL + "/user/register/",form);
 	yield www;
+	
+	Debug.Log("returnVal:" + www.error);
+	
 	try{
-		if(www.error == null){
-			var returnValue : Hashtable = JSON.ParseJSON(www.text);
+		if(www.error == null && www.text != "error"){
+			var returnValue = JSON.Parse(www.text);
 		}else{
 			throw "error:002 登録エラー！再度お試しください！";
 		}
@@ -67,7 +62,7 @@ function registrationUserName(){
 		}else{
 			throw "error:004 登録エラー！再度お試しください！"; 
 		}
-		transitionToMain();
+		Application.LoadLevel("Main");
 		
 	}catch( message ){
 		EditorUtility.DisplayDialog("Error!",message.Message,"OK");

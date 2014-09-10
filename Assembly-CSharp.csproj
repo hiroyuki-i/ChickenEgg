@@ -51,6 +51,10 @@
      <Compile Include="Assets\JSON\VectorTemplates.cs" />
      <None Include="Assets\JSON\readme.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Assembly-UnityScript-firstpass.unityproj">
+      <Project>{8AA9ACD1-2373-6CDD-90D3-BEF00E5691D4}</Project>      <Name>Assembly-UnityScript-firstpass</Name>    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
 	   Other similar extension points exist, see Microsoft.Common.targets.

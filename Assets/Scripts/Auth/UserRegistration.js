@@ -1,6 +1,7 @@
-﻿#pragma strict
+﻿//#pragma strict
 
 import System;
+import SimpleJSON;
 
 private var userId : String;
 private var URL : String = "127.0.0.1";
@@ -37,31 +38,32 @@ function registrationUserName(){
 	form.AddField("userHash",userHash);
 	var www : WWW = new WWW(URL + "/user/register/",form);
 	yield www;
-	
-	Debug.Log("returnVal:" + www.error);
-	
+
+	Debug.Log(www.text);
 	try{
 		if(www.error == null && www.text != "error"){
 			var returnValue = JSON.Parse(www.text);
+			var rState : String = returnValue["state"];
+			var rUserId : String = returnValue["userId"];
+			var rUserHash : String = returnValue["userHash"];
 		}else{
 			throw "error:002 登録エラー！再度お試しください！";
 		}
 		
-		if(!isset(returnValue["userHash"]) || userHash != returnValue["userHash"]){
+		if(isset(returnValue["userHash"]) == false || userHash != rUserHash){
 			throw "error:003 登録エラー！再度お試しください！"; 
 		}
-		if(!isset(returnValue["state"]) || returnValue["state"] == "duplication"){
-			throw "このユーザーネームは既に使用されています。"; 
+		if(isset(returnValue["state"]) == false || rState== "duplication"){
+			throw "error:004 このユーザーネームは既に使用されています。"; 
 		}
 		
-		//register 
-		if(isset(returnValue["state"]) && returnValue["state"] == "registered"
-		&& userId == returnValue["userId"]){
+		//register registered
+		if(isset(returnValue["state"]) == true && rState == "registered" && userId == rUserId){
 			Debug.Log("save userName!");
-			PlayerPrefs.SetString("userId",returnValue["userId"].ToString());
-			PlayerPrefs.SetString("userHash",returnValue["userHash"].ToString());
+			PlayerPrefs.SetString("userId",rUserId);
+			PlayerPrefs.SetString("userHash",rUserHash);
 		}else{
-			throw "error:004 登録エラー！再度お試しください！"; 
+			throw "error:005 登録エラー！再度お試しください！"; 
 		}
 		Application.LoadLevel("Main");
 		

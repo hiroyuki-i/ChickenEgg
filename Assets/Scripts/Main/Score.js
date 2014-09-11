@@ -20,7 +20,7 @@ private var rankingArray;
 
 function Start () {
 	currentScore = 0;
-	highScore = PlayerPrefs.GetInt("highScore",0);
+	highScore = PlayerPrefs.GetInt("highScore");
 	displayHighScore();
 	verticalStyle.fixedWidth = Screen.width * 0.7;
 	verticalStyle.margin.left = (Screen.width - verticalStyle.fixedWidth) / 2;
@@ -32,10 +32,9 @@ function Update () {
 		PlayerPrefs.SetInt("highScore",currentScore);
 		highScore = currentScore;
 		displayHighScore();
-		if(highScoreUpdateDeltaTime > 10.0){
+		if(highScoreUpdateDeltaTime > 10.0 || highScoreUpdateDeltaTime == 0.0){
 			postScore();
-			highScoreUpdateDeltaTime = 0.0;
-			Debug.Log("hiscore update!");
+			highScoreUpdateDeltaTime = Time.deltaTime;
 		}else{
 			highScoreUpdateDeltaTime += Time.deltaTime;
 		}
@@ -75,10 +74,10 @@ function OnGUI(){
 
 function rankingDisplay(){
 	if(GUI.Button(Rect( Screen.width - 90, 10 , 80 , 30),"Close")){
+		isConnected = false;
 		isRankingDisplay = false;
-		isConnect = false;
 	}
-	if(isConnected && rankingArray != null){
+	if(isConnected == true && rankingArray != null){
 		GUILayout.BeginVertical(verticalStyle);
 		GUILayout.Label("Ranking",labelStyle_Label);
 		GUILayout.BeginHorizontal(horizontalStyle);
@@ -96,7 +95,6 @@ function rankingDisplay(){
 			GUILayout.EndHorizontal();
 		}
 		while(row < 10){
-			Debug.Log(row);
 			row++;
 			GUILayout.BeginHorizontal(horizontalStyle);
 			GUILayout.Label(row.ToString(),labelStyle_Rank);
@@ -105,6 +103,10 @@ function rankingDisplay(){
 			GUILayout.EndHorizontal();
 		}
 		GUILayout.EndVertical();
+		if(GUI.Button(Rect( Screen.width - 160, Screen.height - 30 , 150 , 20),"Delete your acount.")){
+			PlayerPrefs.DeleteAll();
+			Application.LoadLevel("auth");
+		}
 	}else{
 		GUI.Label(Rect(Screen.width / 2 , Screen.height / 2, 100 ,30),"Now Loading...");
 		getRanking();
@@ -112,17 +114,16 @@ function rankingDisplay(){
 }
 
 function getRanking(){
-	isConnected = true;
 	var form : WWWForm = new WWWForm();
 	form.AddField("userId",PlayerPrefs.GetString("userId"));
 	form.AddField("userHash",PlayerPrefs.GetString("userHash"));
 	form.AddField("score",highScore);
-	var www : WWW = new WWW(URL + "/score/ranking/",form);
+	var www : WWW = new WWW(URL + "/hiyoko/ranking/",form);
 	yield www;
 	if(www.error == null){
 		rankingArray = JSON.Parse(www.text);
 	}
-	
+	isConnected = true;
 }
 
 function postScore(){
@@ -130,6 +131,9 @@ function postScore(){
 	form.AddField("userId",PlayerPrefs.GetString("userId"));
 	form.AddField("userHash",PlayerPrefs.GetString("userHash"));
 	form.AddField("score",highScore);
-	var www : WWW = new WWW(URL + "/score/hiscore/",form);
+	var www : WWW = new WWW(URL + "/hiyoko/highscore/",form);
 	yield www;
+	if(www.error == null){
+		Debug.Log("this::postScore save!");
+	}
 }

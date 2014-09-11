@@ -9,6 +9,7 @@ function Start () {
 	userId = PlayerPrefs.GetString("userId","");
 	var userHash : String = PlayerPrefs.GetString("userHash","");
 	if(userId.length > 0 && userHash.Length > 0){
+		Debug.Log("userId:" + userId + " userHash:" + userHash);
 		Application.LoadLevel("Main");
 	}
 }

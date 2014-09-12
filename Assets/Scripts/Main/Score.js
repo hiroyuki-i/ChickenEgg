@@ -24,6 +24,7 @@ private var rankingArray;
 #endif
 
 function Start () {
+	Debug.Log("start works! score:" + PlayerPrefs.GetInt("highScore"));
 	currentScore = 0;
 	highScore = PlayerPrefs.GetInt("highScore");
 	displayHighScore();
@@ -33,7 +34,7 @@ function Start () {
 
 function Update () {
 	countHiyoko.text = currentScore.ToString() + " Hiyoko !";
-	if(currentScore >= highScore){
+	if(currentScore > highScore){
 		PlayerPrefs.SetInt("highScore",currentScore);
 		highScore = currentScore;
 		displayHighScore();
@@ -47,7 +48,7 @@ function Update () {
 	
 }
 function OnApplicationQuit(){
-	if(currentScore >= highScore){
+	if(currentScore > highScore){
 		PlayerPrefs.SetInt("highScore",currentScore);
 		highScore = currentScore;
 		postScore();
@@ -109,6 +110,9 @@ function rankingDisplay(){
 		}
 		GUILayout.EndVertical();
 		if(GUI.Button(Rect( Screen.width - 160, Screen.height - 30 , 150 , 20),"Delete your acount.")){
+			currentScore = 0;
+			highScore = 0;
+			postScore();
 			PlayerPrefs.DeleteAll();
 			Application.LoadLevel("auth");
 		}

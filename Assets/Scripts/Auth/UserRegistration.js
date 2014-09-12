@@ -70,6 +70,7 @@ function registrationUserName(){
 			Debug.Log("save userName!");
 			PlayerPrefs.SetString("userId",rUserId);
 			PlayerPrefs.SetString("userHash",rUserHash);
+			PlayerPrefs.SetInt("highScore",0);
 		}else{
 			throw "error:005 登録エラー！再度お試しください！"; 
 		}

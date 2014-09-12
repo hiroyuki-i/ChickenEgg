@@ -2,7 +2,8 @@
 import SimpleJSON;
 
 var countHiyoko : GUIText;
-var HiScore : GUIText;
+var userIdGUI : GUIText;
+var HighScoreGUI : GUIText;
 var verticalStyle : GUIStyle; 
 var labelStyle_Label : GUIStyle;
 var horizontalStyle : GUIStyle;
@@ -10,6 +11,7 @@ var labelStyle_Rank : GUIStyle;
 var labelStyle_UserId  : GUIStyle;
 var labelStyle_Score  : GUIStyle;
 
+private var userId : String;
 private var currentScore : int;
 private var highScore : int;
 private var highScoreUpdateDeltaTime : float = 0.0;
@@ -18,13 +20,13 @@ private var isConnected : boolean = false;
 private var rankingArray;
 
 #if UNITY_EDITOR
-	private var URL : String = "http://chickenegg.unity.psalm.me";
+	private var URL : String = "http://localhost";
 #else
 	private var URL : String = "http://chickenegg.unity.psalm.me";
 #endif
 
 function Start () {
-	Debug.Log("start works! score:" + PlayerPrefs.GetInt("highScore"));
+	userIdGUI.text = PlayerPrefs.GetString("userId","") + "'s";
 	currentScore = 0;
 	highScore = PlayerPrefs.GetInt("highScore");
 	displayHighScore();
@@ -52,7 +54,6 @@ function OnApplicationQuit(){
 		PlayerPrefs.SetInt("highScore",currentScore);
 		highScore = currentScore;
 		postScore();
-		Debug.Log("hiscore update! in applicationQuit ");
 	}
 }
 
@@ -61,7 +62,7 @@ function addScore(){
 }
 
 function displayHighScore(){
-	HiScore.text = "Hi-Score " + highScore.ToString();
+	HighScoreGUI.text = "Hi-Score " + highScore.ToString();
 }
 
 function OnGUI(){

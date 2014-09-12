@@ -8,7 +8,7 @@ private var errorMessage : String = "";
 var errorMessageStyle : GUIStyle;
 
 #if UNITY_EDITOR
-	private var URL : String = "http://chickenegg.unity.psalm.me";
+	private var URL : String = "http://localhost";
 #else
 	private var URL : String = "http://chickenegg.unity.psalm.me";
 #endif

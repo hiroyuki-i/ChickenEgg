@@ -4,7 +4,14 @@ import System;
 import SimpleJSON;
 
 private var userId : String;
-private var URL : String = "127.0.0.1";
+private var errorMessage : String = "";
+var errorMessageStyle : GUIStyle;
+
+#if UNITY_EDITOR
+	private var URL : String = "http://chickenegg.unity.psalm.me";
+#else
+	private var URL : String = "http://chickenegg.unity.psalm.me";
+#endif
 
 function Start () {
 	userId = PlayerPrefs.GetString("userId","");
@@ -18,6 +25,7 @@ function Start () {
 function OnGUI(){
 	var centerWidthPosition = Screen.width / 2 - 150;
 	var centerHeightPosition = Screen.height / 2 - 30;
+	GUI.Label(Rect(centerWidthPosition,centerHeightPosition - 30,300,30),errorMessage,errorMessageStyle);
 	GUI.Label(Rect(centerWidthPosition,centerHeightPosition,300,30),"Enter your name.");
 	userId = GUI.TextField(Rect(centerWidthPosition,centerHeightPosition + 30,300,30),userId,32);
 	if(GUI.Button(Rect(centerWidthPosition,centerHeightPosition + 70 , 150 , 30),"Register")){
@@ -28,7 +36,7 @@ function OnGUI(){
 function registrationUserName(){
 
 	if(userId.length == 0){
-		EditorUtility.DisplayDialog("Error!","error:001 ユーザーネームが入力されていません。","OK");
+		errorMessage = "error:001 ユーザーネームが入力されていません。";
 		return;
 	}
 
@@ -47,14 +55,14 @@ function registrationUserName(){
 			var rUserId : String = returnValue["userId"];
 			var rUserHash : String = returnValue["userHash"];
 		}else{
-			throw "error:002 登録エラー！再度お試しください！";
+			throw www.error + "/" + www.text + "error:002 登録エラー！再度お試しください！";
 		}
 		
 		if(isset(returnValue["userHash"]) == false || userHash != rUserHash){
 			throw "error:003 登録エラー！再度お試しください！"; 
 		}
 		if(isset(returnValue["state"]) == false || rState== "duplication"){
-			throw "error:004 このユーザーネームは既に使用されています。"; 
+			throw "このユーザーネームは既に使用されています。"; 
 		}
 		
 		//register registered
@@ -68,7 +76,7 @@ function registrationUserName(){
 		Application.LoadLevel("Main");
 		
 	}catch( message ){
-		EditorUtility.DisplayDialog("Error!",message.Message,"OK");
+		errorMessage = message.Message;
 	}
 }
 

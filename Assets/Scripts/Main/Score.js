@@ -14,9 +14,14 @@ private var currentScore : int;
 private var highScore : int;
 private var highScoreUpdateDeltaTime : float = 0.0;
 private var isRankingDisplay : boolean = false;
-private var URL : String = "localhost";
 private var isConnected : boolean = false;
 private var rankingArray;
+
+#if UNITY_EDITOR
+	private var URL : String = "http://chickenegg.unity.psalm.me";
+#else
+	private var URL : String = "http://chickenegg.unity.psalm.me";
+#endif
 
 function Start () {
 	currentScore = 0;

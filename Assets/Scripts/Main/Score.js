@@ -20,7 +20,7 @@ private var isConnected : boolean = false;
 private var rankingArray;
 
 #if UNITY_EDITOR
-	private var URL : String = "http://localhost";
+	private var URL : String = "localhost";
 #else
 	private var URL : String = "http://chickenegg.unity.psalm.me";
 #endif

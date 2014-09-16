@@ -43,16 +43,24 @@ function Update () {
 		PlayerPrefs.SetInt("highScore",currentScore);
 		highScore = currentScore;
 		displayHighScore();
-		if(highScoreUpdateDeltaTime == 0.0){
+		if(highScoreUpdateDeltaTime == 0.0 && highScore > 0){
 			postScore();
 			flashMessage.displayMessage("New HighScore! You got it!!");
 			highScoreUpdateDeltaTime = Time.deltaTime;
+		}else if(highScoreUpdateDeltaTime == 0.0 && highScore == 0){
+			postScore();
+			flashMessage.displayMessage("Niwatori Heaven!!");
+			highScoreUpdateDeltaTime = Time.deltaTime;
 		}else if(highScoreUpdateDeltaTime > 10.0){
 			postScore();
-			flashMessage.displayMessage("Highscore save!");
+			flashMessage.displayMessage("Recorded Highscore!!");
 			highScoreUpdateDeltaTime = Time.deltaTime;
 		}else{
 			highScoreUpdateDeltaTime += Time.deltaTime;
+		}
+	}else{
+		if(currentScore == 1){
+			flashMessage.displayMessage("The burning hand moment!!");
 		}
 	}
 	

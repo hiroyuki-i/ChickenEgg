@@ -26,7 +26,7 @@ function OnGUI(){
 	var centerWidthPosition = Screen.width / 2 - 150;
 	var centerHeightPosition = Screen.height / 2 - 30;
 	GUI.Label(Rect(centerWidthPosition,centerHeightPosition - 30,300,30),errorMessage,errorMessageStyle);
-	GUI.Label(Rect(centerWidthPosition,centerHeightPosition,300,30),"Enter your name.");
+	GUI.Label(Rect(centerWidthPosition,centerHeightPosition,300,30),"Enter your name, Save with the highscore.");
 	userId = GUI.TextField(Rect(centerWidthPosition,centerHeightPosition + 30,300,30),userId,32);
 	if(GUI.Button(Rect(centerWidthPosition,centerHeightPosition + 70 , 150 , 30),"Register")){
 		registrationUserName();
@@ -47,7 +47,6 @@ function registrationUserName(){
 	var www : WWW = new WWW(URL + "/user/register/",form);
 	yield www;
 
-	Debug.Log(www.text);
 	try{
 		if(www.error == null && www.text != "error"){
 			var returnValue = JSON.Parse(www.text);

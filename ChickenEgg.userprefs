@@ -1,9 +1,11 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Auth\UserRegistration.js">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Main\Score.js">
     <Files>
-      <File FileName="Assets\Scripts\Main\Score.js" Line="23" Column="30" />
-      <File FileName="Assets\Scripts\Auth\UserRegistration.js" Line="39" Column="49" />
+      <File FileName="Assets\Scripts\Auth\UserRegistration.js" Line="36" Column="33" />
+      <File FileName="Assets\Scripts\Main\Score.js" Line="48" Column="60" />
+      <File FileName="Assets\Scripts\Main\Niwatori.js" Line="21" Column="14" />
+      <File FileName="Assets\Scripts\Main\FlashMessage.js" Line="45" Column="25" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

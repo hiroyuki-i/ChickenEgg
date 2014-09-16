@@ -18,6 +18,7 @@ private var highScoreUpdateDeltaTime : float = 0.0;
 private var isRankingDisplay : boolean = false;
 private var isConnected : boolean = false;
 private var rankingArray;
+private var flashMessage : Component;
 
 #if UNITY_EDITOR
 	private var URL : String = "localhost";
@@ -32,16 +33,23 @@ function Start () {
 	displayHighScore();
 	verticalStyle.fixedWidth = Screen.width * 0.7;
 	verticalStyle.margin.left = (Screen.width - verticalStyle.fixedWidth) / 2;
+	flashMessage = GetComponent(FlashMessage);
+	flashMessage.displayMessage("Hi! " + PlayerPrefs.GetString("userId","") + "!!");
 }
 
 function Update () {
 	countHiyoko.text = currentScore.ToString() + " Hiyoko !";
-	if(currentScore > highScore){
+	if(currentScore >= highScore){
 		PlayerPrefs.SetInt("highScore",currentScore);
 		highScore = currentScore;
 		displayHighScore();
-		if(highScoreUpdateDeltaTime > 10.0 || highScoreUpdateDeltaTime == 0.0){
+		if(highScoreUpdateDeltaTime == 0.0){
 			postScore();
+			flashMessage.displayMessage("New HighScore! You got it!!");
+			highScoreUpdateDeltaTime = Time.deltaTime;
+		}else if(highScoreUpdateDeltaTime > 10.0){
+			postScore();
+			flashMessage.displayMessage("Highscore save!");
 			highScoreUpdateDeltaTime = Time.deltaTime;
 		}else{
 			highScoreUpdateDeltaTime += Time.deltaTime;

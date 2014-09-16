@@ -48,6 +48,7 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\Auth\UserRegistration.js" />
      <Compile Include="Assets\Scripts\Main\Egg.js" />
+     <Compile Include="Assets\Scripts\Main\FlashMessage.js" />
      <Compile Include="Assets\Scripts\Main\Niwatori.js" />
      <Compile Include="Assets\Scripts\Main\Score.js" />
      <Compile Include="Assets\Scripts\Main\TouchController.js" />

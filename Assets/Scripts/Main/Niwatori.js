@@ -8,7 +8,7 @@ private var countTouchTotal : int = 0;
 
 function Start () {
 	var windowSize : Vector2 = Camera.main.ViewportToWorldPoint(new Vector2(1,1));
-	gameObject.transform.position = new Vector2(windowSize.x * 0.75 , windowSize.y * 0.7);
+	gameObject.transform.position = new Vector2(windowSize.x * 0.55 , windowSize.y * 0.6);
 	setCountTouch();
 	EggShotPosition = GameObject.Find("Niwatori").transform.GetChild(0).gameObject; 
 }

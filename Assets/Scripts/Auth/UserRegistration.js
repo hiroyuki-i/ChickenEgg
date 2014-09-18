@@ -5,7 +5,9 @@ import SimpleJSON;
 
 private var userId : String;
 private var errorMessage : String = "";
+private var keyboard : TouchScreenKeyboard;
 var errorMessageStyle : GUIStyle;
+var labelMessageStyle : GUIStyle;
 
 #if UNITY_EDITOR
 	private var URL : String = "localhost";
@@ -23,12 +25,17 @@ function Start () {
 }
 
 function OnGUI(){
-	var centerWidthPosition = Screen.width / 2 - 150;
-	var centerHeightPosition = Screen.height / 2 - 30;
-	GUI.Label(Rect(centerWidthPosition,centerHeightPosition - 30,300,30),errorMessage,errorMessageStyle);
-	GUI.Label(Rect(centerWidthPosition,centerHeightPosition,300,30),"Enter your name, Save with the highscore.");
-	userId = GUI.TextField(Rect(centerWidthPosition,centerHeightPosition + 30,300,30),userId,32);
-	if(GUI.Button(Rect(centerWidthPosition,centerHeightPosition + 70 , 150 , 30),"Register")){
+	var centerWidthPosition = Screen.width / 2 - 200;
+	var centerHeightPosition = Screen.height / 2;
+	GUI.Label(Rect(centerWidthPosition,centerHeightPosition - 40,400,30),errorMessage,errorMessageStyle);
+	GUI.Label(Rect(centerWidthPosition,centerHeightPosition - 10,400,30),"Enter your name.",labelMessageStyle);
+	
+	//textfield
+	GUI.SetNextControlName ("textfield");
+	GUI.skin.textField.fontSize = 54;
+	userId = GUI.TextField(Rect(centerWidthPosition,centerHeightPosition + 30,400,60),userId,32);
+	//button
+	if(GUI.Button(Rect(centerWidthPosition,centerHeightPosition + 100 , 200 , 80),"Register")){
 		registrationUserName();
 	}
 }

@@ -1,5 +1,5 @@
-﻿//#pragma strict
-import SimpleJSON;
+﻿
+import LitJson;
 
 var countHiyoko : GUIText;
 var userIdGUI : GUIText;
@@ -17,8 +17,8 @@ private var highScore : int;
 private var highScoreUpdateDeltaTime : float = 0.0;
 private var isRankingDisplay : boolean = false;
 private var isRankingConnected : boolean = false;
-private var rankingArray = null;
-private var flashMessage : Component;
+private var rankingArray : JsonData = null;
+private var flashMessage : FlashMessage;
 
 #if UNITY_EDITOR
 	private var URL : String = "localhost";
@@ -27,16 +27,16 @@ private var flashMessage : Component;
 #endif
 
 function Start () {
-	//display user info & highscore.
-	userIdGUI.text = PlayerPrefs.GetString("userId","") + "'s";
+	//set default display and username.
 	currentScore = 0;
+	userIdGUI.text = PlayerPrefs.GetString("userId","") + "'s";
 	highScore = PlayerPrefs.GetInt("highScore");
 	displayHighScore();
-	//set ranking modalwindow size.
+	//gui positioning
 	verticalStyle.fixedWidth = Screen.width * 0.7;
 	verticalStyle.margin.left = (Screen.width - verticalStyle.fixedWidth) / 2;
 	//welcome message.
-	flashMessage = GetComponent(FlashMessage);
+	flashMessage = gameObject.GetComponent(FlashMessage);
 	flashMessage.displayMessage("Hi! " + PlayerPrefs.GetString("userId","") + "!!");
 }
 
@@ -93,13 +93,17 @@ function OnGUI(){
 			""
 		);
 	}
-	if(GUI.Button(Rect( Screen.width - 90 , 10 , 80 , 30),"Ranking")){
-		isRankingDisplay = true;
+	GUI.skin.button.padding.top = 10;
+	GUI.skin.button.padding.bottom = 10;
+	if(isRankingDisplay == false){
+		if(GUI.Button(Rect( Screen.width - 130 , 10 , 120 , 45),"Ranking")){
+			isRankingDisplay = true;
+		}
 	}
 }
 
 function rankingDisplay(){
-	if(GUI.Button(Rect( Screen.width - 90, 10 , 80 , 30),"Close")){
+	if(GUI.Button(Rect( Screen.width - 130, 10 , 120 , 45),"Close")){
 		isRankingDisplay = false;
 		rankingArray = null;
 		return;
@@ -113,12 +117,12 @@ function rankingDisplay(){
 		GUILayout.Label("Score",labelStyle_Score);
 		GUILayout.EndHorizontal();
 		var row : int = 0;
-		for(var i in rankingArray){
+		for(var i = 0; i < rankingArray.Count; i++){
 			row++;
 			GUILayout.BeginHorizontal(horizontalStyle);
 			GUILayout.Label(row.ToString(),labelStyle_Rank);
-			GUILayout.Label(i["userId"],labelStyle_UserId);
-			GUILayout.Label(i["score"],labelStyle_Score);
+			GUILayout.Label(rankingArray[i]["userId"].ToString(),labelStyle_UserId);
+			GUILayout.Label(rankingArray[i]["score"].ToString(),labelStyle_Score);
 			GUILayout.EndHorizontal();
 		}
 		while(row < 10){
@@ -130,7 +134,7 @@ function rankingDisplay(){
 			GUILayout.EndHorizontal();
 		}
 		GUILayout.EndVertical();
-		if(GUI.Button(Rect( Screen.width - 160, Screen.height - 30 , 150 , 20),"Delete your acount.")){
+		if(GUI.Button(Rect( Screen.width - 160, Screen.height - 40 , 150 , 30),"Delete your acount.")){
 			currentScore = 0;
 			highScore = 0;
 			postScore();
@@ -154,7 +158,7 @@ function getRanking(){
 	var www : WWW = new WWW(URL + "/hiyoko/ranking/",form);
 	yield www;
 	if(www.error == null && www.text != "false"){
-		rankingArray = JSON.Parse(www.text);
+		rankingArray = JsonMapper.ToObject(www.text);
 		isRankingConnected = false;
 		Debug.Log("Score::ranking return : " + www.text);
 	}
